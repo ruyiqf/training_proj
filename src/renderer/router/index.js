@@ -8,6 +8,10 @@ export default new Router({
     {
       path: '/',
       name: 'landing-page',
+      component: require('@/components/BlankPage').default
+    },
+    {
+      path: '/LandingPage',
       component: require('@/components/LandingPage').default
     },
     {
