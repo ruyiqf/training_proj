@@ -11,8 +11,10 @@
     <span>Only one time change msg: {{msg}}</span>
     <br>
     <input v-model="msg">
-    <p>Original message: "{{message}}"</p>
-    <p>Computed reverse message: "{{reversedMessage}}"</p>
+    <p>Original message: "{{msg}}"</p>
+    <p>Display current time: "{{nowtime}}"</p>
+    <p>Reversed message: "{{ reversedMessage() }}"</p>
+    <p>{{fullName}}</p>
 </div>
 
 </template>
@@ -20,17 +22,34 @@
 <script type="text/javascript">
 export default {
     data() {
-      return {
-        author: "occeancalmcool",
-        rawHtml: "<span style='color:red'>This should be red.</span>",
-        msg: "euxyacg",
-        message: "euxyacg"
-      }
+        return {
+            author: "occeancalmcool",
+            rawHtml: "<span style='color:red'>This should be red.</span>",
+            msg: "euxyacg",
+            message: "euxyacg",
+            firstName: "Foo",
+            lastName: "Bar",
+            fullName: "Foo Bar"
+        }
     },
     computed: {
+        nowtime: function() {
+            return new Date().toLocaleString()
+        }
+    },
+    methods: {
         reversedMessage: function() {
-          return this.message.split('').reverse().join('')
+            return this.message.split('').reverse().join('')
+        }
+    },
+    watch: {
+        firstName: function(val) {
+            this.fullName = val + ' ' + this.lastName
+        },
+        lastName: function(val) {
+            this.fullName = this.firstName + ' ' + val
         }
     }
+
 }
 </script>
